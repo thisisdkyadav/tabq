@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TabQ &mdash; Numbered tab favicons for Ctrl/Cmd+1&ndash;9</title>
+    <meta
+      name="description"
+      content="TabQ badges the favicon of your first 9 Chrome tabs with their number, so you always know where Ctrl/Cmd+1 through 9 will jump. Free and open source."
+    />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="TabQ — Numbered tab favicons" />
+    <meta
+      property="og:description"
+      content="See at a glance where Ctrl/Cmd+1–9 will jump. A tiny, open-source Chrome extension."
+    />
+    <meta property="og:image" content="icon-512.png" />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <!-- replace these two URLs once published -->
+    <header class="nav">
+      <a class="brand" href="#top">
+        <img src="favicon.png" width="28" height="28" alt="" />
+        <span>TabQ</span>
+      </a>
+      <nav>
+        <a href="#how">How it works</a>
+        <a href="#install">Install</a>
+        <a href="#faq">FAQ</a>
+        <a class="ghost" href="https://github.com/your-username/tabq" target="_blank" rel="noopener">GitHub</a>
+        <a class="cta" href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noopener">Add to Chrome</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <!-- ───────────────────────── hero ───────────────────────── -->
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Free &amp; open source &middot; Manifest V3</p>
+          <h1>Know exactly where <span class="grad">Ctrl/&#8984;&nbsp;1&ndash;9</span> will jump.</h1>
+          <p class="lede">
+            Chrome lets you jump to a tab with <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> +
+            a number &mdash; but nothing tells you which tab is which. TabQ paints
+            that number right onto each tab's favicon.
+          </p>
+          <div class="hero-actions">
+            <a class="cta lg" href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noopener">Add to Chrome &mdash; it's free</a>
+            <a class="link" href="#install">or install manually &rarr;</a>
+          </div>
+          <p class="hint">Press <kbd>1</kbd>&ndash;<kbd>9</kbd> on the demo &rarr;</p>
+        </div>
+
+        <div class="hero-demo">
+          <div class="window" role="img" aria-label="A row of tab favicons, each badged with its number 1 through 9.">
+            <div class="window-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+            <canvas id="demo" width="640" height="190"></canvas>
+            <p class="demo-caption" id="demo-caption">Your first nine tabs, numbered.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────── how it works ─────────────────────── -->
+      <section id="how" class="section">
+        <h2>How it works</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon">&#8644;</div>
+            <h3>Always in order</h3>
+            <p>
+              TabQ tracks tab creation, closing, dragging, and moving between
+              windows. The leftmost nine tabs are always badged 1&ndash;9 &mdash;
+              exactly what the shortcuts target.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-icon">&#128260;</div>
+            <h3>Survives favicon changes</h3>
+            <p>
+              When a site swaps its favicon for an unread-count icon (Gmail,
+              Discord, Slack), TabQ re-draws the badge on top &mdash; instantly,
+              with no flicker loop.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-icon">&#128274;</div>
+            <h3>Private by design</h3>
+            <p>
+              No accounts, no tracking, no servers. Favicons are fetched without
+              your cookies and composited locally in your browser. Nothing leaves
+              your machine.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ───────────────────────── install ───────────────────────── -->
+      <section id="install" class="section alt">
+        <h2>Install</h2>
+        <div class="install-grid">
+          <div class="install-col">
+            <h3>From the Chrome Web Store</h3>
+            <p>The easiest way &mdash; one click and you're done.</p>
+            <a class="cta" href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noopener">Add to Chrome</a>
+          </div>
+          <div class="install-col">
+            <h3>Manually (developer mode)</h3>
+            <ol>
+              <li>Download or clone the repo from <a href="https://github.com/your-username/tabq" target="_blank" rel="noopener">GitHub</a>.</li>
+              <li>Open <code>chrome://extensions</code> and enable <strong>Developer mode</strong>.</li>
+              <li>Click <strong>Load unpacked</strong> and select the <code>extension/</code> folder.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────── faq ─────────────────────────── -->
+      <section id="faq" class="section">
+        <h2>FAQ</h2>
+        <div class="faq">
+          <details>
+            <summary>Why only the first nine tabs?</summary>
+            <p>Because Chrome only has shortcuts for nine. <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd>+9 always jumps to the <em>last</em> tab, but TabQ numbers the ninth-from-left to stay consistent with positions 1&ndash;8.</p>
+          </details>
+          <details>
+            <summary>Does it work on every page?</summary>
+            <p>On all normal <code>http(s)</code> pages, yes. Protected pages like <code>chrome://</code> settings or the Web Store can't run extensions, so they can't be badged &mdash; the shortcut still jumps to them.</p>
+          </details>
+          <details>
+            <summary>Does it change my real favicons permanently?</summary>
+            <p>No. The badge is applied live in the page and disappears the moment you reload, switch the tab out of the top nine, or remove the extension.</p>
+          </details>
+          <details>
+            <summary>Is it really open source?</summary>
+            <p>Yes &mdash; MIT licensed. Read every line, file issues, or send a pull request on <a href="https://github.com/your-username/tabq" target="_blank" rel="noopener">GitHub</a>.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <img src="favicon.png" width="24" height="24" alt="" />
+        <span>TabQ</span>
+      </div>
+      <p>Open source under the MIT License.</p>
+      <nav>
+        <a href="https://github.com/your-username/tabq" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/your-username/tabq/blob/main/PRIVACY.md" target="_blank" rel="noopener">Privacy</a>
+        <a href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" rel="noopener">Chrome Web Store</a>
+      </nav>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

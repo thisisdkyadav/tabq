@@ -1,0 +1,14 @@
+# build output
+dist/
+*.zip
+
+# editor / OS cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# scratch
+shot.png
+*.tmp
