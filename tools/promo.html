@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Chrome Web Store screenshot template: exactly 1280x800.
+         Open it and screenshot at window-size 1280,800 (see tools/shots.sh). -->
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { width: 1280px; height: 800px; overflow: hidden; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: #0f1b2d;
+        background:
+          radial-gradient(1100px 540px at 78% -10%, #d8e8ff 0%, rgba(216,232,255,0) 60%),
+          linear-gradient(160deg, #f4f8ff 0%, #eaf2fe 100%);
+        padding: 56px 64px;
+        position: relative;
+      }
+      .brand { display: flex; align-items: center; gap: 12px; }
+      .brand img { width: 40px; height: 40px; border-radius: 10px; }
+      .brand b { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+      .brand span { font-size: 13px; color: #5b6b82; font-weight: 600; }
+
+      h1 {
+        font-size: 52px; font-weight: 800; letter-spacing: -0.025em;
+        line-height: 1.08; margin: 30px 0 14px; max-width: 19ch;
+      }
+      .grad {
+        background: linear-gradient(100deg, #2f8fff, #1f73e6);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      .sub { font-size: 20px; color: #5b6b82; max-width: 52ch; line-height: 1.5; }
+
+      /* browser window mockup */
+      .window {
+        position: absolute; left: 64px; right: 64px; bottom: 56px;
+        height: 392px;
+        background: #fff; border: 1px solid #dde7f4; border-radius: 16px;
+        box-shadow: 0 40px 80px -30px rgba(20,50,100,0.35);
+        overflow: hidden;
+      }
+      .chrome-bar {
+        display: flex; align-items: center; gap: 8px;
+        padding: 13px 16px; background: #eef3fb; border-bottom: 1px solid #e2eaf6;
+      }
+      .dot { width: 12px; height: 12px; border-radius: 50%; }
+      .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+      .omni {
+        flex: 1; margin-left: 12px; height: 28px; border-radius: 14px;
+        background: #fff; border: 1px solid #dde7f4;
+        display: flex; align-items: center; padding: 0 14px;
+        font-size: 12px; color: #8a9bb4;
+      }
+      .tabs { display: flex; background: #f6f9fe; border-bottom: 1px solid #e2eaf6; padding: 0 6px; }
+      .tab {
+        width: 124px; height: 44px; display: flex; align-items: center; gap: 8px;
+        padding: 0 10px; border-right: 1px solid #e8eef8; position: relative;
+      }
+      .tab .fav { width: 18px; height: 18px; flex: 0 0 auto; }
+      .tab .t {
+        font-size: 12px; color: #44566f; white-space: nowrap;
+        overflow: hidden; text-overflow: ellipsis;
+      }
+      .tab.active { background: #fff; border-top: 2px solid #2f8fff; }
+      .tab.active .t { color: #0f1b2d; font-weight: 600; }
+      .page { padding: 30px 34px; }
+      .page .ph { height: 16px; border-radius: 6px; background: #eef3fb; }
+      .page .ph.w1 { width: 42%; height: 26px; margin-bottom: 22px; background: #e4edfa; }
+      .page .ph.w2 { width: 88%; margin-bottom: 12px; }
+      .page .ph.w3 { width: 76%; margin-bottom: 12px; }
+      .page .ph.w4 { width: 81%; }
+
+      /* feature spotlight (zoom callout) */
+      .spot {
+        position: absolute; right: 92px; bottom: 150px;
+        width: 320px; background: #0f1b2d; color: #fff;
+        border-radius: 16px; padding: 20px; display: flex; gap: 16px; align-items: center;
+        box-shadow: 0 30px 60px -20px rgba(15,27,45,0.55);
+      }
+      .spot canvas { width: 72px; height: 72px; flex: 0 0 auto; }
+      .spot h3 { font-size: 16px; margin-bottom: 5px; }
+      .spot p { font-size: 13px; color: #b9c6db; line-height: 1.45; }
+      kbd {
+        font: 700 12px ui-monospace, Menlo, Consolas, monospace;
+        background: #24344d; border-radius: 5px; padding: 2px 6px; color: #cfe0fb;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="brand">
+      <img src="../extension/icons/icon128.png" alt="" />
+      <b>TabQ</b><span>for Chrome</span>
+    </div>
+
+    <h1>Know exactly where <span class="grad">Ctrl / ⌘&nbsp;1&ndash;9</span> will jump.</h1>
+    <p class="sub">
+      TabQ badges the favicon of your first nine tabs with their number — so the
+      jump shortcuts you already have finally become usable at a glance.
+    </p>
+
+    <div class="window">
+      <div class="chrome-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="omni">github.com/thisisdkyadav/tabq</span>
+      </div>
+      <div class="tabs" id="tabs"></div>
+      <div class="page">
+        <div class="ph w1"></div>
+        <div class="ph w2"></div>
+        <div class="ph w3"></div>
+        <div class="ph w4"></div>
+      </div>
+    </div>
+
+    <div class="spot">
+      <canvas id="spot-fav" width="144" height="144"></canvas>
+      <div>
+        <h3>Right on the favicon</h3>
+        <p>The number rides along even when a site swaps its icon, so <kbd>4</kbd> is never a guess.</p>
+      </div>
+    </div>
+
+    <script>
+      // Mock tabs (favicon background, glyph, glyph colour, title).
+      const SITES = [
+        { bg: "#ffffff", glyph: "G", fg: "#4285F4", title: "Google" },
+        { bg: "#ff0033", glyph: "▶", fg: "#fff", title: "YouTube" },
+        { bg: "#161b22", glyph: "<>", fg: "#fff", small: true, title: "thisisdkyadav/tabq" },
+        { bg: "#ffffff", glyph: "✉", fg: "#EA4335", title: "Inbox (3) – Gmail" },
+        { bg: "#1f9d55", glyph: "◎", fg: "#fff", title: "Google Maps" },
+        { bg: "#0b0b0b", glyph: "X", fg: "#fff", title: "Home / X" },
+        { bg: "#ffffff", glyph: "F", fg: "#A259FF", title: "TabQ – Figma" },
+        { bg: "#4A154B", glyph: "S", fg: "#fff", title: "TabQ workspace" },
+        { bg: "#ffffff", glyph: "N", fg: "#111", title: "Roadmap" },
+      ];
+      const BADGE_FG = "#4da6ff";
+
+      function roundRect(ctx, x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+      }
+
+      // The extension's badge, drawn verbatim.
+      function drawBadge(ctx, x, y, size, number) {
+        const r = size * 0.31;
+        const cx = x + size - r - size * 0.03;
+        const cy = y + r + size * 0.03;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fillStyle = "#fff"; ctx.fill();
+        ctx.lineWidth = Math.max(1, size * 0.045);
+        ctx.strokeStyle = BADGE_FG; ctx.stroke();
+        ctx.fillStyle = BADGE_FG;
+        ctx.font = `bold ${Math.round(r * 1.75)}px Arial, sans-serif`;
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillText(String(number), cx, cy + size * 0.01);
+      }
+
+      function drawFavicon(canvas, site, number, cssSize) {
+        const SS = 2;
+        canvas.width = cssSize * SS;
+        canvas.height = cssSize * SS;
+        canvas.style.width = cssSize + "px";
+        canvas.style.height = cssSize + "px";
+        const ctx = canvas.getContext("2d");
+        ctx.scale(SS, SS);
+        const pad = 1;
+        const s = cssSize - pad * 2;
+        ctx.fillStyle = site.bg;
+        roundRect(ctx, pad, pad, s, s, s * 0.24);
+        ctx.fill();
+        if (site.bg.toLowerCase() === "#ffffff") {
+          ctx.strokeStyle = "#e3ebf6"; ctx.lineWidth = 1;
+          roundRect(ctx, pad + 0.5, pad + 0.5, s - 1, s - 1, s * 0.24); ctx.stroke();
+        }
+        ctx.fillStyle = site.fg;
+        ctx.font = `700 ${Math.round(s * (site.small ? 0.34 : 0.5))}px Arial, sans-serif`;
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillText(site.glyph, pad + s / 2, pad + s / 2 + 1);
+        drawBadge(ctx, pad, pad, s, number);
+      }
+
+      const tabsEl = document.getElementById("tabs");
+      SITES.forEach((site, i) => {
+        const tab = document.createElement("div");
+        tab.className = "tab" + (i === 2 ? " active" : "");
+        const cv = document.createElement("canvas");
+        cv.className = "fav";
+        const title = document.createElement("span");
+        title.className = "t";
+        title.textContent = site.title;
+        tab.append(cv, title);
+        tabsEl.append(tab);
+        drawFavicon(cv, site, i + 1, 18);
+      });
+
+      // big spotlight favicon (Gmail, badge 4) at 72px
+      drawFavicon(document.getElementById("spot-fav"), SITES[3], 4, 72);
+    </script>
+  </body>
+</html>

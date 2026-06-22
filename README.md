@@ -3,6 +3,11 @@
   <h1>TabQ</h1>
   <p><strong>Numbered tab favicons for Chrome.</strong></p>
   <p>
+    <a href="https://tabq.awacxo.com">Website</a> &middot;
+    <a href="https://chromewebstore.google.com/detail/npobdimgpjnhaajhldokdmmmeknapaeg">Chrome Web Store</a> &middot;
+    <a href="https://github.com/thisisdkyadav/tabq/issues">Report a bug</a>
+  </p>
+  <p>
     Chrome lets you jump to a tab with <code>Ctrl</code>/<code>⌘</code> + a number —
     but nothing tells you which tab is which. TabQ badges the favicon of your
     first 9 tabs with their number (1–9), so you always know where the shortcut
@@ -43,7 +48,7 @@ tabq/
 
 ### From the Chrome Web Store
 
-> Once published, link it here: `https://chromewebstore.google.com/detail/<your-extension-id>`
+[**Add to Chrome →**](https://chromewebstore.google.com/detail/npobdimgpjnhaajhldokdmmmeknapaeg)
 
 ### Manually (developer mode)
 
@@ -89,8 +94,8 @@ cd website && python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Publishing checklist (Chrome Web Store)
 
-- [ ] Replace the placeholder URLs (`your-username`, `your-extension-id`) in
-      `extension/manifest.json`, `extension/popup.html`, and `website/`.
+- [x] Repo + Web Store URLs are wired into `extension/manifest.json`,
+      `extension/popup.html`, and `website/`.
 - [ ] Run `python3 tools/build.py` and upload `dist/tabq-<version>.zip`.
 - [ ] Provide store assets the listing requires: at least one **1280×800** (or
       640×400) screenshot and a **128×128** store icon (`extension/icons/icon128.png`).
@@ -113,4 +118,4 @@ Issues and pull requests are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-[MIT](LICENSE) © TabQ contributors.
+[MIT](LICENSE) © Devesh Yadav.

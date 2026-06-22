@@ -44,4 +44,4 @@ repository with a new "Last updated" date.
 
 ## Contact
 
-Questions? Open an issue at `https://github.com/your-username/tabq/issues`.
+Questions? Open an issue at `https://github.com/thisisdkyadav/tabq/issues`.
